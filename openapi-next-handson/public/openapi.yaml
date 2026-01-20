@@ -1,0 +1,32 @@
+openapi: 3.0.0 # バージョン指定
+info:
+  title: Sample API # APIのタイトル
+  version: 1.0.0 # バージョン情報
+
+paths: # エンドポイント定義の開始
+  /api/users: # エンドポイントのパス
+    get: # HTTPメソッド post put deleteも書ける
+      summary: ユーザー一覧の取得 # エンドポイントの説明
+      description: すべてのユーザー情報を取得します。 # 詳細説明
+      responses: # レスポンス定義の開始
+        "200": # httpステータスコード200 ok
+          description: 成功 # レスポンスの説明
+          content: # レスポンスのコンテンツタイプ
+            application/json: # JSON形式のレスポンス。このAPIは JSON を返す、という宣言
+              schema: #返却されるjsonの構造定義 ここから肩の話
+                type: object # レスポンス全チアはオブジェクト型
+                properties: #オブジェクトが持つプロパティの定義
+                  users: # resuponseオブジェクトの中にあるキーusers { "users": [...] } の定義
+                    type: array # usersは配列である
+                    items: #配列の 中身の型定義
+                      type: object #配列の1要素はオブジェクト型
+                      properties: #ユーザーオブジェクトのプロパティ定義
+                        id: #ユーザーID
+                          type: number #数値型
+                        name: #ユーザー名
+                          type: string #文字列型
+                        email: #メールアドレス
+                          type: string #文字列型
+
+
+# レスポンス構造を 文章ではなく型で定義することで、API利用者がレスポンスの内容を理解しやすくなる。
