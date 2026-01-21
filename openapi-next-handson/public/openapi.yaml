@@ -9,7 +9,7 @@ paths: # エンドポイント定義の開始
       summary: ユーザー一覧の取得 # エンドポイントの説明
       description: すべてのユーザー情報を取得します。 # 詳細説明
       responses: # レスポンス定義の開始
-        "200": # httpステータスコード200 ok
+        '200': # httpステータスコード200 ok
           description: 成功 # レスポンスの説明
           content: # レスポンスのコンテンツタイプ
             application/json: # JSON形式のレスポンス。このAPIは JSON を返す、という宣言
@@ -27,6 +27,76 @@ paths: # エンドポイント定義の開始
                           type: string #文字列型
                         email: #メールアドレス
                           type: string #文字列型
+  /api/users/{id}: # ユーザーIDを含むパス
+    put: # HTTP PUT メソッド
+      summary: ユーザー情報の更新
+      description: 指定したユーザーの情報を更新します。
 
+      # どのユーザーか定義
+      parameters: # パス・クエリパラメータ定義
+        - name: id # パラメータ名
+          in: path # URLパス内のパラメータ  /api/users/4
+          required: true # 必須 parametersは必須
+          schema:
+            type: number # ユーザーIDは数値
+
+      # 何に更新するか
+      requestBody: # リクエストボディ定義（PUTで重要）
+        required: true # 必須 k城慎吾の状態を送る
+        content: #requestBodyの中身
+          application/json: # JSONで送る
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+      # 更新後に何を返すか
+      responses:
+        '200':
+          description: 更新成功 #正常に更新できた場合
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type:number:
+                  name:
+                    type: string
+                  email:
+                    type: string
+        '400':
+          description: リクエスト不正
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: string
+        '404':
+          description: ユーザーが存在しない
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          description: サーバー内部エラー
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
 
 # レスポンス構造を 文章ではなく型で定義することで、API利用者がレスポンスの内容を理解しやすくなる。
