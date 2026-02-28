@@ -1,13 +1,13 @@
 'use client';
 
 import { Suspense } from 'react';
-import { useFetchSwr } from '../hooks/use-fetch-swr';
+import { usePariSwr } from '../hooks/use-pari-swr';
 import { fetchUsersData } from './actions';
 import UsersIdView from './userIdView';
 import UsersIdView2 from './userIdView2';
 
 export default function UsersPresentional() {
-  const { d: users, e: error, isLoading } = useFetchSwr(fetchUsersData);
+  const { d: users, e: error, isLoading } = usePariSwr(fetchUsersData);
 
   if (isLoading) return <p>Loading...UsersPresentional</p>;
   if (error) return <p>エラーだよ😭: {error.message}s</p>;

@@ -1,10 +1,10 @@
 'use client';
 
-import { useFetchSwr } from '../hooks/use-fetch-swr';
+import { usePariSwr } from '../hooks/use-pari-swr';
 import { fetchUsersDataId } from './actions';
 
 export default function UsersIdView() {
-  const { d: user, e: error } = useFetchSwr(fetchUsersDataId, [{ id: 1 }], {
+  const { d: user, e: error } = usePariSwr(fetchUsersDataId, [{ id: 1 }], {
     suspense: true,
   });
 

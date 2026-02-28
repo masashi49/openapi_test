@@ -1,10 +1,10 @@
 'use client';
 
-import { useFetchSwr } from '../hooks/use-fetch-swr';
+import { usePariSwr } from '../hooks/use-pari-swr';
 import { fetchUsersDataId } from './actions';
 
 export default function UsersIdView2() {
-  const { d: user, e: error, isLoading } = useFetchSwr(fetchUsersDataId, [{ id: 1 }]);
+  const { d: user, e: error, isLoading } = usePariSwr(fetchUsersDataId, [{ id: 1 }]);
 
   if (isLoading) return <p>UsersIdView2のローディング中</p>;
   if (error) return <p>エラーだよ😭: {error.message}s</p>;

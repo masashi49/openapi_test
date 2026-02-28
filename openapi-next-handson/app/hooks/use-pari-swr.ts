@@ -6,7 +6,7 @@ import { safe } from '../utils/safe';
  * P: 引数の型（配列）
  * T: 戻り値の型
  */
-export function useFetchSwr<T, P extends any[]>(
+export function usePariSwr<T, P extends any[]>(
   action: (...args: P) => Promise<T>,
   args?: P, // 引数はオプション（?）にする
   config?: SWRConfiguration,
