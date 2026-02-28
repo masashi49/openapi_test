@@ -28,3 +28,21 @@ export async function fetchUsersDataId({ id }: { id: number }): Promise<UserTodo
   }
   return res.json();
 }
+
+// P: Pure (引数を受け取ってfetchするだけ)
+export async function updateUserData({
+  id,
+  title,
+}: {
+  id: number;
+  title: string;
+}): Promise<UserTodo> {
+  await delay(1000); // ちょっとだけ待機💅
+  const res = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
+    method: 'PATCH',
+    body: JSON.stringify({ title }),
+  });
+
+  if (!res.ok) throw new Error(`Update failed: ${res.status}`);
+  return res.json();
+}
